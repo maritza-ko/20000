@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>딱마리치킨 | 인터랙티브 전략 보고서</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: A dashboard-style, single-page application designed for intuitive exploration. The structure prioritizes user understanding over mirroring the report's linear format. It begins with a high-level summary (Hero section), followed by a sticky navigation bar for quick access to thematic sections: Vision, Core Strategies (interactive tabs), an interactive Roadmap, and Brand philosophy. This thematic grouping allows users to digest complex information in manageable, interconnected chunks, making the ambitious plan more accessible and engaging. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: 20,000 stores goal. Goal: Inform. Viz: Large, bold text in the hero. Interaction: None. Justification: Immediately grabs attention and states the main goal.
+        - Report Info: Core strategies (Automation, Product, Channel). Goal: Organize/Compare. Viz: Interactive tabbed interface. Interaction: Click to switch content. Justification: Allows users to focus on one strategy at a time without being overwhelmed, promoting focused learning.
+        - Report Info: Direct vs. Franchise store potential. Goal: Compare. Viz: Bar Chart (Chart.js). Interaction: Hover tooltips. Justification: Visually and dramatically demonstrates the key advantage of the direct-store model, making the data instantly understandable.
+        - Report Info: Project timeline/milestones. Goal: Show Change/Progression. Viz: Interactive HTML/CSS horizontal timeline. Interaction: Click on milestones to reveal details. Justification: Turns a static list of dates into an engaging, explorable journey of the project's future.
+        - Report Info: Control Center concept. Goal: Organize/Explain Process. Viz: Simple flowchart diagram made with HTML/CSS. Interaction: Subtle hover effects. Justification: Clearly visualizes the centralized operational structure, a key business advantage, without complex graphics.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            background-color: white;
+            border: 4px solid #F97316;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .timeline-item.active::after {
+            background-color: #F97316;
+        }
+    </style>
+</head>
+<body class="bg-amber-50 text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-bold text-xl text-orange-600">딱마리치킨</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#vision" class="text-gray-600 hover:bg-orange-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">우리의 비전</a>
+                        <a href="#strategy" class="text-gray-600 hover:bg-orange-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">핵심 전략</a>
+                        <a href="#roadmap" class="text-gray-600 hover:bg-orange-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">추진 로드맵</a>
+                        <a href="#brand" class="text-gray-600 hover:bg-orange-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">브랜드</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="bg-white">
+            <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+                    <span class="block">'치킨의 양심'으로 시장의 판도를 바꾸다</span>
+                    <span class="block text-orange-600">전국 직영점 2만 개를 향한 위대한 도전</span>
+                </h1>
+                <p class="mt-6 max-w-lg mx-auto text-xl text-gray-500 sm:max-w-3xl">
+                    딱마리치킨은 '점바점 고통'을 해결하고, 자동화와 혁신적인 메뉴를 통해 대한민국 치킨의 새로운 표준을 제시합니다.
+                </p>
+            </div>
+        </section>
+
+        <section id="vision" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-base font-semibold text-orange-600 tracking-wide uppercase">Our Vision</h2>
+                    <p class="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">우리는 '고통'을 해결합니다</p>
+                    <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                        딱마리치킨의 시작은 모든 고객이 겪는 '점바점(지점마다 맛이 다른) 고통'을 해결하겠다는 약속, 즉 '치킨의 양심'에서 출발합니다. 언제 어디서 주문해도 변함없이 맛있는 치킨을 제공하는 것이 우리의 최우선 목표입니다.
+                    </p>
+                </div>
+
+                <div class="mt-12 grid gap-8 md:grid-cols-3 lg:grid-cols-3">
+                    <div class="p-8 bg-white rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-gray-900">치킨의 양심</h3>
+                        <p class="mt-4 text-gray-600">튀김기 1개에 2/3마리만. 최적의 온도 175°C를 유지하여 언제나 같은 맛의 치킨을 제공하는 것, 이것이 우리의 양심이자 고객과의 약속입니다.</p>
+                    </div>
+                    <div class="p-8 bg-white rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-gray-900">점바점 고통 해결</h3>
+                        <p class="mt-4 text-gray-600">'어제는 맛있었는데 오늘은 왜 다르지?'라는 고객의 불안감을 완전히 해소합니다. 딱마리치킨은 모든 매장에서 동일한 고품질의 맛을 보장합니다.</p>
+                    </div>
+                    <div class="p-8 bg-white rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-gray-900">3.2공정</h3>
+                        <p class="mt-4 text-gray-600">3번의 반죽과 2번의 튀김 과정을 거쳐 겉은 더욱 바삭하고 속은 촉촉한 황금 비율을 완성합니다. 이는 사람의 손에 의존하는 것이 아닌, 자동화된 시스템을 통해 구현되는 딱마리치킨만의 독보적인 기술로, 언제 어디서나 변함없는 최고의 맛을 보장하는 핵심입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="strategy" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center">
+                    <h2 class="text-base font-semibold text-orange-600 tracking-wide uppercase">Core Strategy</h2>
+                    <p class="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">시장을 뒤엎을 3가지 혁신</p>
+                    <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                        딱마리치킨은 기술, 제품, 그리고 채널 혁신이라는 세 가지 강력한 축을 바탕으로 기존 치킨 시장의 패러다임을 전환하고자 합니다. 각 전략 탭을 클릭하여 상세 내용을 확인해보세요.
+                    </p>
+                </div>
+
+                <div class="mt-12">
+                    <div class="border-b border-gray-200">
+                        <nav class="-mb-px flex space-x-8 justify-center" aria-label="Tabs">
+                            <button id="tab-automation" class="strategy-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-orange-500 text-orange-600">
+                                🤖 기술 혁신: 자동화
+                            </button>
+                            <button id="tab-product" class="strategy-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                                🍗 제품 혁신: '치전'
+                            </button>
+                            <button id="tab-channel" class="strategy-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                                🏪 채널 혁신: 직영점
+                            </button>
+                        </nav>
+                    </div>
+
+                    <div id="content-automation" class="strategy-content mt-8">
+                         <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <h3 class="text-2xl font-bold">주방의 완전 자동화를 향하여</h3>
+                                <p class="mt-4 text-gray-600">오토리프트 튀김기, 자동 반죽기 등 초기 자동화를 통해 일관된 품질을 유지하고 가격 경쟁력을 확보합니다. 3~5년 후에는 인간형 로봇(옵티머스)이 주방을 담당할 수 있도록 모든 동선을 미리 설계하여, 미래 기술에 선제적으로 대비합니다.</p>
+                                <ul class="mt-6 space-y-4 text-gray-600">
+                                    <li class="flex items-start"><span class="mr-2 text-orange-500">✓</span> 품질 UP, 가격 DOWN</li>
+                                    <li class="flex items-start"><span class="mr-2 text-orange-500">✓</span> 인간의 실수를 원천 차단</li>
+                                    <li class="flex items-start"><span class="mr-2 text-orange-500">✓</span> 미래 로봇 시대를 위한 선제적 주방 설계</li>
+                                </ul>
+                            </div>
+                            <div class="flex justify-center items-center h-full bg-gray-100 rounded-lg p-8">
+                                <span class="text-8xl">⚙️➡️🤖</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="content-product" class="strategy-content mt-8 hidden">
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <h3 class="text-2xl font-bold">새로운 문화, '치전'의 시작</h3>
+                                <p class="mt-4 text-gray-600">'치맥'을 넘어설 새로운 조합, '치전(치킨+전)'을 제안합니다. 프리미엄 치킨과 자사 브랜드 '생전포차'의 고품질 전을 결합한 '치전세트'를 통해 최고의 가성비와 새로운 미식 경험을 동시에 선사합니다. 깐풍, 흑초, 버터갈릭 등 독창적인 메뉴로 고객의 입맛을 사로잡습니다.</p>
+                                 <ul class="mt-6 space-y-4 text-gray-600">
+                                    <li class="flex items-start"><span class="mr-2 text-orange-500">✓</span> '치맥'을 잇는 '치전' 서브타이핑 구축</li>
+                                    <li class="flex items-start"><span class="mr-2 text-orange-500">✓</span> 독보적인 맛의 유니크 메뉴 라인업</li>
+                                    <li class="flex items-start"><span class="mr-2 text-orange-500">✓</span> '3.2 공정'으로 완성하는 절대적 맛의 일관성</li>
+                                </ul>
+                            </div>
+                            <div class="flex justify-center items-center h-full bg-gray-100 rounded-lg p-8">
+                                <span class="text-8xl">🍗+🥞</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="content-channel" class="strategy-content mt-8 hidden">
+                         <div class="grid md:grid-cols-1 gap-8 items-center">
+                            <div>
+                                <h3 class="text-2xl font-bold text-center">2만개 직영점으로 전국을 뒤덮다</h3>
+                                <p class="mt-4 text-gray-600 text-center max-w-3xl mx-auto">프랜차이즈의 한계를 넘어섭니다. 모든 매장을 직영으로 운영하여 본사의 강력한 통제 하에 품질과 서비스를 관리하고, 가맹거래법상 거리 제한 없이 주요 상권에 집중적으로 출점하여 시장 지배력을 극대화합니다.</p>
+                            </div>
+                            <div>
+                                <div class="chart-container">
+                                    <canvas id="storeChart"></canvas>
+                                </div>
+                                <p class="text-center text-sm text-gray-500 mt-2">신림역 상권 내 예상 출점 가능 점포 수 비교</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="lg:text-center">
+                    <h2 class="text-base font-semibold text-orange-600 tracking-wide uppercase">Execution Roadmap</h2>
+                    <p class="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">목표를 향한 단계별 실행 계획</p>
+                    <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                        '2만 직영점'이라는 원대한 목표를 달성하기 위해, 우리는 체계적이고 구체적인 실행 계획을 가지고 있습니다. 타임라인의 각 항목을 클릭하여 단계별 추진 과제를 확인해보세요.
+                    </p>
+                </div>
+                <div class="mt-16">
+                    <div class="relative">
+                        <div class="absolute left-1/2 transform -translate-x-1/2 h-full border-l-2 border-gray-300"></div>
+                        <div class="flex justify-between items-center w-full">
+                            <div class="timeline-item w-1/4 text-center cursor-pointer p-2 active" data-target="timeline-detail-1">
+                                <p class="font-bold text-orange-600">2025년 9월 말</p>
+                            </div>
+                            <div class="timeline-item w-1/4 text-center cursor-pointer p-2" data-target="timeline-detail-2">
+                                <p class="font-bold">2025년 10월 20일</p>
+                            </div>
+                            <div class="timeline-item w-1/4 text-center cursor-pointer p-2" data-target="timeline-detail-3">
+                                <p class="font-bold">2025년 내</p>
+                            </div>
+                            <div class="timeline-item w-1/4 text-center cursor-pointer p-2" data-target="timeline-detail-4">
+                                <p class="font-bold">미래 목표</p>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 w-full h-1 bg-gray-300"></div>
+                    </div>
+                    <div id="timeline-details" class="mt-12 bg-white p-8 rounded-lg shadow-lg min-h-[150px]">
+                        <div id="timeline-detail-1" class="timeline-detail-content">
+                            <h4 class="font-bold text-xl">기반 구축 단계</h4>
+                            <p class="mt-2 text-gray-600">로봇 도입을 고려한 최종 주방 동선 설계를 완료하고, 깐풍치킨 등 핵심 메뉴의 맛 일관성을 완벽하게 확보하여 '점바점 없는' 브랜드의 초석을 다집니다.</p>
+                        </div>
+                        <div id="timeline-detail-2" class="timeline-detail-content hidden">
+                             <h4 class="font-bold text-xl">브랜드 런칭</h4>
+                            <p class="mt-2 text-gray-600">정립된 브랜드 페르소나를 기반으로 BI, 공식 홈페이지, SNS 채널(틱톡, 릴스 등)을 공식 오픈하고 '빠삭이' 캐릭터를 통해 고객과의 소통을 시작합니다.</p>
+                        </div>
+                        <div id="timeline-detail-3" class="timeline-detail-content hidden">
+                            <h4 class="font-bold text-xl">시장성 검증</h4>
+                            <p class="mt-2 text-gray-600">서울 핵심 지역에 10개의 테스트 직영점을 개설합니다. 관제센터(CS센터) 중심의 운영 관리 시스템을 실제 운영에 적용하며 시스템을 최종 점검하고 보완합니다.</p>
+                        </div>
+                        <div id="timeline-detail-4" class="timeline-detail-content hidden">
+                            <h4 class="font-bold text-xl">전국 제패</h4>
+                            <p class="mt-2 text-gray-600">테스트 매장 운영 데이터를 바탕으로 전국 2만 개 직영점 출점 로드맵을 가동하여, 대한민국 치킨 시장의 판도를 완전히 뒤바꿉니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="brand" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:text-center">
+                    <h2 class="text-base font-semibold text-orange-600 tracking-wide uppercase">Brand & Operation</h2>
+                    <p class="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">브랜드와 운영의 중심</p>
+                     <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+                        '치킨의 양심'이라는 철학은 마케팅과 운영 관리 전반에 걸쳐 일관되게 적용됩니다. 우리는 타겟 고객과 적극적으로 소통하고, 모든 경험을 중앙에서 관리하여 최상의 브랜드 경험을 제공합니다.
+                    </p>
+                </div>
+                <div class="mt-12 grid md:grid-cols-2 gap-12">
+                     <div>
+                        <h3 class="text-2xl font-bold">젠지(Gen Z)를 사로잡을 브랜드 페르소나</h3>
+                        <p class="mt-4 text-gray-600">'작은 사치'와 '힙한' 경험을 추구하는 젠지(Gen Z)와 MZ세대가 우리의 핵심 고객입니다. 브랜드 캐릭터 '빠삭이'를 활용한 숏폼 콘텐츠(틱톡, 릴스)를 통해 친근하고 유쾌하게 소통하며, '치전'을 새로운 유행으로 만들어갈 것입니다.</p>
+                    </div>
+                     <div>
+                        <h3 class="text-2xl font-bold">모든 것을 통제하는 '관제센터'</h3>
+                        <p class="mt-4 text-gray-600">2만 개 직영점 운영의 핵심은 바로 '관제센터(CS센터)'입니다. 각 매장의 판매 데이터, 재고, 고객 리뷰 등을 본사에서 실시간으로 통합 관리하여, 어떤 문제든 신속하게 대응하고 전 매장의 서비스 품질을 최상으로 유지합니다.</p>
+                        <div class="mt-4 p-4 border rounded-lg bg-gray-50">
+                            <div class="text-center font-bold">관제센터 (CS센터)</div>
+                            <div class="flex justify-center my-2">
+                                <div class="w-px bg-gray-400 h-6"></div>
+                            </div>
+                            <div class="grid grid-cols-3 text-center gap-2">
+                                <div><span class="text-sm bg-orange-100 p-1 rounded">매장 A</span></div>
+                                <div><span class="text-sm bg-orange-100 p-1 rounded">매장 B</span></div>
+                                <div><span class="text-sm bg-orange-100 p-1 rounded">...매장 20000</span></div>
+                                <div class="w-full h-px bg-gray-400 col-span-3 my-1"></div>
+                                <div class="col-span-3 text-sm text-gray-600">플랫폼 관리 & 리뷰 통합 운영</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">&copy; 2025 딱마리치킨. All rights reserved. 대한민국 치킨 시장의 새로운 역사를 쓰겠습니다.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.strategy-tab');
+            const contents = document.querySelectorAll('.strategy-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => {
+                        t.classList.remove('border-orange-500', 'text-orange-600');
+                        t.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                    });
+                    tab.classList.add('border-orange-500', 'text-orange-600');
+                    tab.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                    
+                    const targetId = `content-${tab.id.split('-')[1]}`;
+                    contents.forEach(content => {
+                        if (content.id === targetId) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const timelineDetails = document.querySelectorAll('.timeline-detail-content');
+
+            timelineItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    timelineItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+
+                    const targetId = item.dataset.target;
+                    timelineDetails.forEach(detail => {
+                         if (detail.id === targetId) {
+                            detail.classList.remove('hidden');
+                        } else {
+                            detail.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            const ctx = document.getElementById('storeChart').getContext('2d');
+            const storeChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['프랜차이즈 (가맹거래법 적용)', '딱마리치킨 (직영)'],
+                    datasets: [{
+                        label: '상권 내 출점 가능 점포 수',
+                        data: [2, 20],
+                        backgroundColor: [
+                            'rgba(251, 146, 60, 0.6)',
+                            'rgba(249, 115, 22, 0.8)',
+                        ],
+                        borderColor: [
+                            'rgba(251, 146, 60, 1)',
+                            'rgba(249, 115, 22, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: '직영점 모델의 압도적인 출점 경쟁력',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw}개 이상`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '점포 수'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
