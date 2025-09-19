@@ -59,6 +59,7 @@
             border: 4px solid #E9A300;
             border-radius: 50%;
             z-index: 1;
+            transition: background-color 0.3s ease;
         }
         .timeline-item.active::after {
             background-color: #E9A300;
@@ -66,6 +67,14 @@
         .nav-link.active {
             color: #E9A300;
             font-weight: 700;
+        }
+        .timeline-detail-content.show {
+            animation: fadeIn 0.5s ease-out;
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -106,18 +115,18 @@
                     <div class="card text-center">
                         <div class="text-6xl text-[#E9A300] mb-4"><i class="fas fa-heart"></i></div>
                         <h3 class="text-2xl font-bold mb-2">치킨의 양심</h3>
-                        <p class="text-gray-600">튀김기 1개에 <span class="highlight">2/3마리만</span>, 최적 온도 <span class="highlight">175°C</span>를 유지하여 언제나 같은 맛의 치킨을 제공합니다.</p>
+                        <p class="text-gray-600">튀김기 1대에 <span class="highlight text-xl">2/3마리만 튀겨</span>, 최적 온도 <span class="highlight text-xl">175°C</span>를 유지하여 언제나 같은 맛의 치킨을 제공합니다. 우리 매장은 튀김기 1대가 아닌, 4대를 사용합니다.</p>
                     </div>
                     <div class="card text-center">
                         <div class="text-6xl text-[#E9A300] mb-4"><i class="fas fa-map-marker-alt"></i></div>
                         <h3 class="text-2xl font-bold mb-2">점바점 고통 해결</h3>
-                        <p class="text-gray-600">'어제는 맛있었는데 오늘은 왜 다르지?'라는 불안감을 해소하고, <span class="highlight">모든 매장에서 동일한 고품질의 맛</span>을 보장합니다.</p>
+                        <p class="text-gray-600">'어제는 맛있었는데 오늘은 왜 다르지?'라는 불안감을 해소하고, <span class="highlight text-xl">모든 매장에서 동일한 고품질의 맛</span>을 보장합니다.</p>
                     </div>
                     <div class="card text-center">
                         <div class="text-6xl text-[#E9A300] mb-4"><i class="fas fa-cogs"></i></div>
                         <h3 class="text-2xl font-bold mb-2">3.2공정</h3>
                         <p class="text-gray-600">
-                            <span class="highlight">3번 반죽</span>, <span class="highlight">2번 튀김</span>. 겉은 바삭하고 속은 촉촉한 황금 비율을 완성하는 딱마리치킨만의 <span class="highlight">독보적인 자동화 기술</span>입니다.
+                            <span class="highlight text-xl">3번 반죽</span>, <span class="highlight text-xl">2번 튀김</span>. 겉은 바삭하고 속은 촉촉한 황금 비율을 완성하는 딱마리치킨만의 <span class="highlight text-xl">독보적인 자동화 기술</span>입니다.
                         </p>
                     </div>
                 </div>
@@ -140,7 +149,7 @@
                          <div>
                             <h3 class="text-2xl font-bold mb-4">주방의 완전 자동화를 향하여</h3>
                             <p class="text-gray-600">
-                                오토리프트 튀김기, 자동 반죽기 등 초기 자동화를 통해 <span class="highlight">일관된 품질과 가격 경쟁력</span>을 확보합니다. 미래에는 인간형 로봇(옵티머스)이 주방을 담당할 수 있도록 모든 동선을 미리 설계해 대비합니다.
+                                오토리프트 튀김기, 자동 반죽기 등 초기 자동화를 통해 <span class="highlight text-xl">일관된 품질과 가격 경쟁력</span>을 확보합니다. 미래에는 인간형 로봇(옵티머스)이 주방을 담당할 수 있도록 모든 동선을 미리 설계해 대비합니다.
                             </p>
                             <ul class="mt-6 space-y-3 text-gray-600">
                                 <li class="flex items-center"><i class="fas fa-check-circle text-[#00CED1] mr-2"></i> 품질 UP, 가격 DOWN</li>
@@ -157,7 +166,7 @@
                         <div>
                             <h3 class="text-2xl font-bold mb-4">새로운 문화, '치전'의 시작</h3>
                             <p class="text-gray-600">
-                                '치맥'을 넘어설 새로운 조합, <span class="highlight">'치전(치킨+전)'</span>을 제안합니다. 프리미엄 치킨과 자사 브랜드 '생전포차'의 고품질 전을 결합해 최고의 <span class="highlight">가성비와 새로운 미식 경험</span>을 동시에 선사합니다.
+                                '치맥'을 넘어설 새로운 조합, <span class="highlight text-xl">'치전(치킨+전)'</span>을 제안합니다. 프리미엄 치킨과 자사 브랜드 '생전포차'의 고품질 전을 결합해 최고의 <span class="highlight text-xl">가성비와 새로운 미식 경험</span>을 동시에 선사합니다.
                             </p>
                             <ul class="mt-6 space-y-3 text-gray-600">
                                 <li class="flex items-center"><i class="fas fa-check-circle text-[#00CED1] mr-2"></i> '치맥'을 잇는 '치전' 문화 구축</li>
@@ -175,10 +184,10 @@
                             <div>
                                 <h3 class="text-2xl font-bold mb-4 text-center">2만개 직영점으로 전국을 뒤덮다</h3>
                                 <p class="text-gray-600 text-center max-w-3xl mx-auto">
-                                    프랜차이즈의 한계를 뛰어넘어 <span class="highlight">모든 매장을 직영으로 운영</span>합니다. 본사의 강력한 통제 하에 품질과 서비스를 관리하고, 가맹거래법상 거리 제한 없이 주요 상권에 출점해 시장 지배력을 극대화합니다.
+                                    프랜차이즈의 한계를 뛰어넘어 <span class="highlight text-xl">모든 매장을 직영으로 운영</span>합니다. 본사의 강력한 통제 하에 품질과 서비스를 관리하고, 가맹거래법상 거리 제한 없이 주요 상권에 출점해 시장 지배력을 극대화합니다.
                                 </p>
                             </div>
-                            <div class="chart-container mt-6">
+                            <div class="chart-container mt-6 h-[400px]">
                                 <canvas id="storeChart"></canvas>
                                 <p class="text-center text-sm text-gray-500 mt-4">신림역 상권 내 예상 출점 가능 점포 수 비교</p>
                             </div>
@@ -200,7 +209,7 @@
                                 <p class="font-bold text-[#E9A300]">2025년 9월 말</p>
                             </div>
                             <div class="timeline-item w-1/4 text-center cursor-pointer p-2" data-target="timeline-detail-2">
-                                <p class="font-bold">2025년 10월 20일</p>
+                                <p class="font-bold">10월 말</p>
                             </div>
                             <div class="timeline-item w-1/4 text-center cursor-pointer p-2" data-target="timeline-detail-3">
                                 <p class="font-bold">2025년 내</p>
@@ -210,22 +219,22 @@
                             </div>
                         </div>
                     </div>
-                    <div id="timeline-details" class="mt-12 bg-white p-8 rounded-lg shadow-lg min-h-[150px]">
-                        <div id="timeline-detail-1" class="timeline-detail-content">
-                            <h4 class="font-bold text-xl mb-2">기반 구축 단계</h4>
-                            <p class="text-gray-600">로봇 도입을 고려한 최종 주방 동선 설계를 완료하고, 핵심 메뉴의 맛 일관성을 확보하여 '점바점 없는' 브랜드의 초석을 다집니다.</p>
+                    <div id="timeline-details" class="mt-12 bg-white p-8 rounded-lg shadow-lg min-h-[150px] flex items-center justify-center text-center">
+                        <div id="timeline-detail-1" class="timeline-detail-content show">
+                            <h4 class="font-bold text-3xl mb-2">기반 구축 단계</h4>
+                            <p class="text-lg text-gray-600">로봇 도입을 고려한 최종 주방 동선 설계를 완료하고, <span class="highlight">핵심 메뉴의 맛 일관성</span>을 확보하여 '점바점 없는' 브랜드의 초석을 다집니다.</p>
                         </div>
                         <div id="timeline-detail-2" class="timeline-detail-content hidden">
-                             <h4 class="font-bold text-xl mb-2">브랜드 런칭</h4>
-                            <p class="text-gray-600">브랜드 페르소나를 기반으로 BI, 공식 홈페이지, SNS 채널을 오픈하고 '빠삭이' 캐릭터로 소통을 시작합니다.</p>
+                             <h4 class="font-bold text-3xl mb-2">브랜드 런칭</h4>
+                            <p class="text-lg text-gray-600">브랜드 페르소나를 기반으로 BI, 공식 홈페이지, SNS 채널을 오픈하고 <span class="highlight">'빠삭이' 캐릭터</span>로 소통을 시작합니다.</p>
                         </div>
                         <div id="timeline-detail-3" class="timeline-detail-content hidden">
-                            <h4 class="font-bold text-xl mb-2">시장성 검증</h4>
-                            <p class="text-600">서울 핵심 지역에 10개의 테스트 직영점을 개설하고, 관제센터 중심의 운영 관리 시스템을 최종 점검합니다.</p>
+                            <h4 class="font-bold text-3xl mb-2">시장성 검증</h4>
+                            <p class="text-lg text-gray-600">서울 핵심 지역에 <span class="highlight">10개의 테스트 직영점</span>을 개설하고, <span class="highlight">관제센터 중심의 운영 관리 시스템</span>을 최종 점검합니다.</p>
                         </div>
                         <div id="timeline-detail-4" class="timeline-detail-content hidden">
-                            <h4 class="font-bold text-xl mb-2">전국 제패</h4>
-                            <p class="text-gray-600">테스트 매장 데이터를 바탕으로 전국 2만 개 직영점 출점 로드맵을 가동하여 시장의 판도를 뒤바꿉니다.</p>
+                            <h4 class="font-bold text-3xl mb-2">전국 제패</h4>
+                            <p class="text-lg text-gray-600">테스트 매장 데이터를 바탕으로 <span class="highlight">전국 2만 개 직영점</span> 출점 로드맵을 가동하여 시장의 판도를 뒤바꿉니다.</p>
                         </div>
                     </div>
                 </div>
@@ -240,13 +249,13 @@
                      <div class="card">
                         <h3 class="text-2xl font-bold mb-4">젠지(Gen Z)를 사로잡을 브랜드 페르소나</h3>
                         <p class="text-gray-600">
-                            '작은 사치'와 '힙한' 경험을 추구하는 젠지(Gen Z)와 MZ세대가 우리의 핵심 고객입니다. 캐릭터 '빠삭이'를 활용한 숏폼 콘텐츠(틱톡, 릴스)로 친근하게 소통하며 <span class="highlight">'치전'을 새로운 유행</span>으로 만들어갈 것입니다.
+                            '<span class="highlight text-xl">작은 사치</span>'와 '<span class="highlight text-xl">힙한</span>' 경험을 추구하는 젠지(Gen Z)와 MZ세대가 우리의 핵심 고객입니다. 캐릭터 '빠삭이'를 활용한 숏폼 콘텐츠(틱톡, 릴스)로 친근하게 소통하며 <span class="highlight text-xl">'치전'을 새로운 유행</span>으로 만들어갈 것입니다.
                         </p>
                     </div>
                      <div class="card">
                         <h3 class="text-2xl font-bold mb-4">모든 것을 통제하는 '관제센터'</h3>
                         <p class="text-gray-600">
-                            2만 개 직영점 운영의 핵심은 <span class="highlight">'관제센터(CS센터)'</span>입니다. 매장 판매 데이터, 재고, 고객 리뷰 등을 본사에서 실시간으로 관리하여 어떤 문제든 신속하게 대응하고 품질을 최상으로 유지합니다.
+                            2만 개 직영점 운영의 핵심은 <span class="highlight text-xl">'관제센터(CS센터)'</span>입니다. 매장 판매 데이터, 재고, 고객 리뷰 등을 본사에서 실시간으로 관리하여 어떤 문제든 신속하게 대응하고 품질을 최상으로 유지합니다.
                         </p>
                         <div class="mt-6 p-4 border-2 border-[#E9A300] rounded-lg bg-[#FDF9F0]">
                             <div class="text-center font-bold text-[#E9A300]">관제센터 (CS센터)</div>
@@ -276,24 +285,19 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // 모든 내부 링크에 대해 부드러운 스크롤을 적용하는 통합 함수
-            // 이 함수는 깜빡임 현상을 유발하는 기본 동작을 막고,
-            // JavaScript로 부드러운 스크롤을 실행합니다.
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    // 기본 앵커 동작을 막습니다.
                     e.preventDefault();
 
                     const targetId = this.getAttribute('href').substring(1);
                     const targetSection = document.getElementById(targetId);
 
                     if (targetSection) {
-                        // 헤더의 높이를 고려하여 정확한 위치로 스크롤합니다.
                         window.scrollTo({
                             top: targetSection.offsetTop - document.querySelector('header').offsetHeight,
                             behavior: 'smooth'
                         });
 
-                        // 내비게이션 링크의 활성화 상태를 업데이트합니다.
                         document.querySelectorAll('.nav-link').forEach(link => {
                             link.classList.remove('active');
                         });
@@ -302,7 +306,7 @@
                 });
             });
 
-            // 탭 메뉴 관련 기존 스크립트
+            // 탭 메뉴 관련 스크립트
             const tabs = document.querySelectorAll('.strategy-tab');
             const contents = document.querySelectorAll('.strategy-content');
 
@@ -327,26 +331,33 @@
                 });
             });
 
-            // 타임라인 관련 기존 스크립트
+            // 타임라인 관련 스크립트
             const timelineItems = document.querySelectorAll('.timeline-item');
             const timelineDetails = document.querySelectorAll('.timeline-detail-content');
 
             timelineItems.forEach(item => {
                 item.addEventListener('click', () => {
+                    // 모든 타임라인 아이템과 상세 내용을 비활성화합니다.
                     timelineItems.forEach(i => i.classList.remove('active'));
+                    timelineDetails.forEach(d => {
+                        d.classList.remove('show');
+                        d.classList.add('hidden');
+                    });
+                    
+                    // 현재 클릭한 아이템을 활성화합니다.
                     item.classList.add('active');
 
+                    // 해당 상세 내용을 찾아 표시합니다.
                     const targetId = item.dataset.target;
-                    timelineDetails.forEach(detail => {
-                         if (detail.id === targetId) {
-                            detail.classList.remove('hidden');
-                        } else {
-                            detail.classList.add('hidden');
-                        }
-                    });
+                    const targetContent = document.getElementById(targetId);
+                    if (targetContent) {
+                        targetContent.classList.remove('hidden');
+                        targetContent.classList.add('show');
+                    }
                 });
             });
 
+            // 차트 관련 스크립트
             const ctx = document.getElementById('storeChart').getContext('2d');
             const storeChart = new Chart(ctx, {
                 type: 'bar',
